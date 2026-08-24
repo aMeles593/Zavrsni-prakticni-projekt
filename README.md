@@ -66,6 +66,17 @@ Nakon kloniranja repozitorija treba otvoriti mapu projekta:
 cd nogometna-app
 ```
 
+## Korištenje aplikacije
+
+Nakon pokretanja backenda i frontenda, aplikacija se otvara u web pregledniku. Na početnoj stranici korisniku se prikazuju dostupna nogometna natjecanja.
+
+Odabirom željene lige korisnik može pregledati dostupne sezone te odabrati sezonu za koju želi pregledati utakmice. Nakon odabira sezone prikazuje se raspored utakmica i njihovi rezultati.
+
+Odabirom pojedine utakmice korisnik može otvoriti stranicu s detaljima utakmice, na kojoj su dostupni podaci o momčadima, rezultatu, sastavima i događajima na utakmici.
+
+Za pregled utakmica koje su trenutno u tijeku korisnik na početnoj stranici odabire opciju **„Live matches“**. Na toj stranici prikazuju se utakmice koje su trenutno u tijeku, a njihovi rezultati i statusi automatski se ažuriraju tijekom utakmice bez potrebe za ručnim osvježavanjem stranice.
+
+
 ### Backend
 
 Treba otvoriti backend mapu:
@@ -80,7 +91,7 @@ Zatim treba instalirati potrebne pakete:
 npm install
 ```
 
-U mapi `backend` potrebno je napraviti `.env` datoteku i upisati podatke potrebne za spajanje na PostgreSQL bazu te API ključ za API-Football.
+U mapi `backend` u `.env` datoteci potrebno je upisati podatke potrebne za spajanje na PostgreSQL bazu te API ključ za API-Football.
 
 Primjer konfiguracije:
 
@@ -157,8 +168,6 @@ Kod korištenja besplatnog API-Football plana postoje ograničenja broja dnevnih
 Za praćenje utakmica koje su trenutno u tijeku koristi se `Match Worker`.
 
 Worker periodički provjerava podatke o utakmicama koje se igraju te ažurira njihove rezultate i statuse u bazi podataka.
-
-Za pronalazak utakmica koje su u tijeku treba se pritisniti dugme "Live matches" na početnoj stranici.
 
 Frontend se za promjene može povezati s backendom putem Server-Sent Events (SSE), čime se korisniku omogućuje prikaz promjena bez potrebe za ručnim osvježavanjem stranice.
 
