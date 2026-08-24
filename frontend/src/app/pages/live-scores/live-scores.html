@@ -1,0 +1,59 @@
+<div class="container py-5">
+
+  <div class="hero text-center text-white p-5 mb-4 shadow-lg">
+    <h1 class="display-3 fw-bold text-dark">🔴 Live Matches</h1>
+    <p class="lead text-dark">The matches that are currently being played</p>
+  </div>
+
+  @if (loading)
+  {
+
+  <div class="text-center text-white mb-4">
+    Loading live matches...
+  </div>
+  }
+  @else if (!loading && matches.length === 0)
+  {
+    
+  <div class="alert alert-secondary bg-dark border-secondary text-white text-center">
+    There are currently no live matches.
+  </div>
+  } 
+  @else {
+    <div class="live-match-card" *ngFor="let match of matches" (click)="openMatch(match.api_match_id)"
+    style="cursor: pointer">
+
+    <div class="league d-flex align-items-center gap-2">
+      <img *ngIf="match.league_logo" [src]="match.league_logo" width="24" height="24" alt="">
+      <span>{{ match.league_name }}</span>
+      <span *ngIf="match.round_name" class="ms-2">• {{ match.round_name }}</span>
+    </div>
+
+    <div class="match-row">
+      <div class="team">
+        <img *ngIf="match.home_logo" [src]="match.home_logo" width="40" height="40" alt="">
+        <span>{{ match.home_team }}</span>
+      </div>
+
+      <div class="score">
+        <strong>{{ match.score_home }} : {{ match.score_away }}</strong>
+        <div class="live-time">
+          🔴 {{ match.status }}
+          <span *ngIf="match.live_minute">{{ match.live_minute }}'</span>
+        </div>
+      </div>
+
+      <div class="team">
+        <span>{{ match.away_team }}</span>
+        <img *ngIf="match.away_logo" [src]="match.away_logo" width="40" height="40" alt="">
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center mt-4">
+    <a routerLink="/" class="btn btn-outline-light">← Back to Home</a>
+  </div>
+
+}
+
+</div>

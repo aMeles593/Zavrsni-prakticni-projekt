@@ -1,0 +1,67 @@
+<div class="container py-5">
+
+  <div class="hero text-center text-white p-5 mb-4 shadow-lg">
+
+    <h1 class="display-3 fw-bold">FootyHub ⚽</h1>
+
+    <p class="lead text-light">
+      Live scores, leagues & match tracking in real time
+    </p>
+
+    <a routerLink="/live" class="btn btn-danger btn-lg px-5 mt-3 glow-btn">
+      🔴 Live Matches
+    </a>
+
+  </div>
+
+    <div class="quick-strip mb-5">
+
+    <div class="chip" *ngFor="let league of featuredLeagues">
+      <a [routerLink]="['/league', league.api_id]">
+        🏆 {{ league.name }}
+      </a>
+    </div>
+
+  </div>
+
+  <div class="section-card mb-5">
+
+    <h3>📅 Today Focus</h3>
+
+    <p class="text-muted mb-0">
+      Follow all live matches happening right now across Europe and world leagues.
+    </p>
+
+  </div>
+
+  <h3 class="mb-3">🏆 Explore Leagues</h3>
+
+  <div class="row g-4">
+
+    <div class="col-12 col-md-4" *ngFor="let league of visibleExploreLeagues">
+      <a [routerLink]="['/league', league.api_id]">
+        <div class="card league-card text-center p-4">
+          <img [src]="league.logo" width="55">
+          <h5 class="text-black">{{ league.name }}</h5>
+          <small class="text-black">{{ league.country }}</small>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-12 col-md-4"
+         *ngIf="visibleCount < exploreLeagues.length">
+
+      <div class="card league-card view-more-card text-center p-4"
+           (click)="loadMore()">
+
+        <div class="fs-1">➕</div>
+        <h5 class="mt-2 text-black">View more</h5>
+        <small class="text-muted">Load more leagues</small>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

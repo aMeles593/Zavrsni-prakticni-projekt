@@ -1,0 +1,97 @@
+<div class="container py-5">
+
+  <div class="app-shell">
+
+    <div class="hero text-center text-white p-5 mb-4 shadow-lg league-hero">
+
+      <h1 class="display-3 fw-bold">
+        <ng-container *ngIf="!loading(); else skeleton">
+          <div class="d-flex align-items-center justify-content-center gap-2">
+            <img [src]="leagueLogo()" width="60" height="60" />
+            <span class="text-dark">
+              {{ leagueName() }}
+            </span>
+          </div>
+        </ng-container>
+        <ng-template #skeleton>
+          Loading league...
+        </ng-template>
+      </h1>
+      <p class="lead text-dark" *ngIf="leagueName()">
+        Live matches, fixtures & results
+      </p>
+
+      <div class="text-center mb-4" *ngIf="!loading()">
+
+      <div class="mb-3">
+        <label class="form-label text-dark">Select season:</label>
+        <select
+          class="form-select w-auto mx-auto"
+          [(ngModel)]="selectedSeason"
+          (ngModelChange)="onSeasonChange($event)">
+
+          <option
+            *ngFor="let season of seasons"
+            [ngValue]="season">
+            {{ season }}
+          </option>
+
+        </select>
+      </div>
+
+    </div>
+
+    <div class="mt-4" *ngIf="!loading() && !fixturesLoading && fixtures.length">
+
+      <div *ngFor="let round of matchesByRound">
+        <div class="d-flex align-items-center justify-content-between mb-3 mt-4">
+          <h3 class="text-warning mb-0">
+            🏁 {{ round.name }}
+          </h3>
+
+          <span class="text-light small">
+            {{ round.matches.length }} matches
+          </span>
+        </div>
+
+        <div class="list-group mb-3">
+          <div 
+            class="list-group-item bg-dark text-white border-secondary"
+            *ngFor="let match of round.matches"
+            (click)="openMatch(match.api_match_id)"
+            style="cursor:pointer"
+            >
+            <div class="row align-items-center g-3">
+              <div class="col-12 col-md-2 small text-light">
+                {{ match.match_date || match.date | date:'dd.MM.yyyy' }}
+              </div>
+              <div class="col-12 col-md-3 fw-bold">
+                {{ match.home_team }}
+              </div>
+              <div class="col-12 col-md-2 text-center fw-bold fs-5">
+                {{ match.score_home }} : {{ match.score_away }}
+              </div>
+              <div class="col-12 col-md-3 fw-bold text-end">
+                {{ match.away_team }}
+              </div>
+              <div class="col-12 col-md-2 text-end small text-info">
+                Round {{ match.round_number ?? '—' }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4 text-white" *ngIf="!loading() && fixturesLoading">
+      <div class="alert alert-secondary bg-dark border-secondary text-white">
+        Učitavanje utakmica...
+      </div>
+    </div>
+
+    <div class="mt-4 text-white" *ngIf="!loading() && !fixturesLoading && !fixtures.length">
+      <div class="alert alert-secondary bg-dark border-secondary text-white">
+        No fixtures available for this season yet.
+      </div>
+    </div>
+</div>

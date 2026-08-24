@@ -1,0 +1,89 @@
+body {
+  background: #0b1220;
+  color: white;
+}
+
+.hero {
+  background: linear-gradient(135deg, #0f172a, #1f2937);
+  border-radius: 20px;
+}
+
+.glow-btn {
+  box-shadow: 0 0 20px rgba(220, 53, 69, 0.6);
+}
+
+.quick-strip {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+}
+
+.chip {
+  flex: 1;
+  text-align: center;
+  background: rgba(255,255,255,0.06);
+  padding: 12px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.chip:hover {
+  background: rgba(220,53,69,0.3);
+  transform: scale(1.05);
+}
+
+.chip a {
+  color: #94a3b8;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.section-card {
+  background: rgba(255,255,255,0.05);
+  padding: 20px;
+  border-radius: 14px;
+  backdrop-filter: blur(8px);
+}
+
+.live-card {
+  background: rgba(255,255,255,0.06);
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.score-box {
+  background: #dc3545;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.league-card {
+  background: rgba(255,255,255,0.06);
+  border: none;
+  color: white;
+  transition: 0.2s;
+  border-radius: 16px;
+}
+
+.league-card:hover {
+  transform: translateY(-6px);
+}
+
+.league-title {
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.view-more-card {
+  cursor: pointer;
+  border: 1px dashed rgba(255,255,255,0.3);
+  transition: 0.2s;
+}
+
+.view-more-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255,255,255,0.08);
+}

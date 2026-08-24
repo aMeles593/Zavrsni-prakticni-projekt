@@ -1,0 +1,312 @@
+<div class="container py-5">
+  <div class="match-page" *ngIf="match">
+
+
+    <div class="league-header text-center mb-5">
+      <img 
+        [src]="match.league_logo"
+        width="90"
+        height="90"
+        class="mb-3"
+      />
+      <h2 class="text-black fw-bold">
+        {{ match.league_name }}
+      </h2>
+      <p class="text-black">
+        {{ match.match_date | date:'dd.MM.yyyy HH:mm' }}
+      </p>
+    </div>
+
+
+    <div class="match-card shadow-lg">
+      <div class="teams">
+
+        
+        <div class="team home-team">
+          <img 
+          [src]="match.home_logo"
+          width="90"
+          height="90">
+          <h3>
+            {{ match.home_team }}
+          </h3>
+        </div>
+
+
+        <div class="score">
+          <div class="result">
+            {{ match.score_home }}
+            <span>
+              :
+            </span>
+            {{ match.score_away }}
+          </div>
+          <div class="status">
+
+  🔴 {{ match.status }}
+
+  <span
+  *ngIf="match.live_minute">
+
+    {{match.live_minute}}'
+
+  </span>
+
+</div>
+        </div>
+
+
+        <div class="team away-team">
+          <img 
+          [src]="match.away_logo"
+          width="90"
+          height="90">
+          <h3>
+            {{ match.away_team }}
+          </h3>
+        </div>
+      </div>
+
+
+      <div class="round">
+        🏁 {{ match.round_name }}
+        <span *ngIf="match.round_number">
+          - Round {{ match.round_number }}
+        </span>
+      </div>
+    </div>
+  </div>
+
+
+  <div
+  class="text-center text-white"
+  *ngIf="!match">
+    Loading match...
+  </div>
+
+
+    <div class="match-tabs">
+      <button
+      class="tab-btn"
+      [class.active]="activeTab==='events'"
+      (click)="showEvents()">
+      ⚽ Match Timeline
+      </button>
+      <button
+      class="tab-btn"
+      [class.active]="activeTab==='lineups'"
+      (click)="showLineups()">
+      👥 Lineups
+      </button>
+    </div>
+
+    <div
+    class="timeline-container mt-5"
+    *ngIf="activeTab==='events' && events.length">
+
+    <div
+    class="timeline-row"
+    *ngFor="let event of events">
+
+      <div class="timeline-side home-side">
+        <div
+        class="event-card home-event"
+        *ngIf="event.team_name === match.home_team">
+          <div class="minute">
+            {{ event.minute }}'
+          </div>
+
+
+          <ng-container *ngIf="event.type === 'subst'; else normalEvent">
+            <strong>
+              🔄 Substitution
+            </strong>
+            <div class="substitution">
+              <div class="in-player">
+                ⬆️ IN:
+                {{ event.assist_name }}
+              </div>
+              <div class="out-player">
+                ⬇️ OUT:
+                {{ event.player_name }}
+              </div>
+            </div>
+            <span>
+              {{ event.detail }}
+            </span>
+          </ng-container>
+
+          <ng-template #normalEvent>
+            <strong>
+              {{ event.type }}
+            </strong>
+            <p>
+              {{ event.player_name }}
+            </p>
+            <span>
+              {{ event.detail }}
+            </span>
+
+            <small
+            *ngIf="event.type === 'Goal' && event.assist_name">
+              🅰️ Assist:
+              {{ event.assist_name }}
+            </small>
+          </ng-template>
+        </div>
+      </div>
+
+
+      <div class="timeline-center">
+        <div class="dot"></div>
+      </div>
+
+
+      <div class="timeline-side away-side">
+        <div
+        class="event-card away-event"
+        *ngIf="event.team_name === match.away_team">
+          <div class="minute">
+            {{ event.minute }}'
+          </div>
+
+          <ng-container *ngIf="event.type === 'subst'; else normalEvent">
+            <strong>
+              🔄 Substitution
+            </strong>
+            <div class="substitution">
+              <div class="in-player">
+                ⬆️ IN:
+                {{ event.assist_name }}
+              </div>
+              <div class="out-player">
+                ⬇️ OUT:
+                {{ event.player_name }}
+              </div>
+            </div>
+            <span>
+              {{ event.detail }}
+            </span>
+          </ng-container>
+
+
+          <ng-template #normalEvent>
+            <strong>
+              {{ event.type }}
+            </strong>
+            <p>
+              {{ event.player_name }}
+            </p>
+            <span>
+              {{ event.detail }}
+            </span>
+
+            <small
+            *ngIf="event.type === 'Goal' && event.assist_name">
+              🅰️ Assist:
+              {{ event.assist_name }}
+            </small>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="lineups-container mt-5"
+    *ngIf="activeTab==='lineups'">
+    <h2 class="text-black text-center mb-4">
+      Lineups
+    </h2>
+    <div 
+    *ngIf="lineupLoading"
+    class="text-center">
+    Loading lineups...
+    </div>
+    <div class="lineups" *ngIf="lineups">
+
+    <div class="team-lineup">
+    <h3>
+    {{lineups.away.team.name}}
+    </h3>
+    <h4>
+    Starting XI
+    </h4>
+    <div 
+    class="player-card"
+    *ngFor="let p of lineups.away.starters">
+    <div class="number">
+    {{p.player.number}}
+    </div>
+    <div class="player-info">
+    <strong>
+    {{p.player.name}}
+    </strong>
+    <small>
+    {{p.player.position}}
+    </small>
+    </div>
+    </div>
+    <h4 class="sub-title">
+    Substitutes
+    </h4>
+    <div 
+    class="player-card substitute"
+    *ngFor="let p of lineups.away.substitutes">
+    <div class="number">
+    {{p.player.number}}
+    </div>
+    <div class="player-info">
+    <strong>
+    {{p.player.name}}
+    </strong>
+    <small>
+    {{p.player.position}}
+    </small>
+    </div>
+    </div>
+    </div>
+
+    <div class="team-lineup">
+    <h3>
+    {{lineups.home.team.name}}
+    </h3>
+    <h4>
+    Starting XI
+    </h4>
+    <div 
+    class="player-card"
+    *ngFor="let p of lineups.home.starters">
+    <div class="number">
+    {{p.player.number}}
+    </div>
+    <div class="player-info">
+    <strong>
+    {{p.player.name}}
+    </strong>
+    <small>
+    {{p.player.position}}
+    </small>
+    </div>
+    </div>
+    <h4 class="sub-title">
+    Substitutes
+    </h4>
+    <div 
+    class="player-card substitute"
+    *ngFor="let p of lineups.home.substitutes">
+    <div class="number">
+    {{p.player.number}}
+    </div>
+    <div class="player-info">
+    <strong>
+    {{p.player.name}}
+    </strong>
+    <small>
+    {{p.player.position}}
+    </small>
+    </div>
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
