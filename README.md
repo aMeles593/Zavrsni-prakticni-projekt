@@ -66,17 +66,6 @@ Nakon kloniranja repozitorija treba otvoriti mapu projekta:
 cd nogometna-app
 ```
 
-## Korištenje aplikacije
-
-Nakon pokretanja backenda i frontenda, aplikacija se otvara u web pregledniku. Na početnoj stranici korisniku se prikazuju dostupna nogometna natjecanja.
-
-Odabirom željene lige korisnik može pregledati dostupne sezone te odabrati sezonu za koju želi pregledati utakmice. Nakon odabira sezone prikazuje se raspored utakmica i njihovi rezultati.
-
-Odabirom pojedine utakmice korisnik može otvoriti stranicu s detaljima utakmice, na kojoj su dostupni podaci o momčadima, rezultatu, sastavima i događajima na utakmici.
-
-Za pregled utakmica koje su trenutno u tijeku korisnik na početnoj stranici odabire opciju **„Live matches“**. Na toj stranici prikazuju se utakmice koje su trenutno u tijeku, a njihovi rezultati i statusi automatski se ažuriraju tijekom utakmice bez potrebe za ručnim osvježavanjem stranice.
-
-
 ### Backend
 
 Treba otvoriti backend mapu:
@@ -144,6 +133,16 @@ Aplikacija je nakon pokretanja dostupna na:
 ```text
 http://localhost:4200
 ```
+
+## Korištenje aplikacije
+
+Nakon pokretanja backenda i frontenda, aplikacija se otvara u web pregledniku. Na početnoj stranici korisniku se prikazuju dostupna nogometna natjecanja.
+
+Odabirom željene lige korisnik može pregledati dostupne sezone te odabrati sezonu za koju želi pregledati utakmice. Nakon odabira sezone prikazuje se raspored utakmica i njihovi rezultati.
+
+Odabirom pojedine utakmice korisnik može otvoriti stranicu s detaljima utakmice, na kojoj su dostupni podaci o momčadima, rezultatu, sastavima i događajima na utakmici.
+
+Za pregled utakmica koje su trenutno u tijeku korisnik na početnoj stranici odabire opciju **„Live matches“**. Na toj stranici prikazuju se utakmice koje su trenutno u tijeku, a njihovi rezultati i statusi automatski se ažuriraju tijekom utakmice bez potrebe za ručnim osvježavanjem stranice.
 
 ## PostgreSQL baza
 
