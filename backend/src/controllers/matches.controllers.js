@@ -253,14 +253,7 @@ export const getLiveMatches = async (req, res) => {
         status,
         live_minute
       FROM matches
-      WHERE status IN (
-        '1H',
-        '2H',
-        'HT',
-        'ET',
-        'P',
-        'LIVE'
-      )
+      WHERE status IN ('1H', '2H', 'HT', 'ET', 'P', 'LIVE' )
       ORDER BY match_date ASC
     `);
 

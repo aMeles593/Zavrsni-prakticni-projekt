@@ -189,7 +189,7 @@ export const saveFixturesToDB = async (fixtures, leagueId, db) => {
         api_match_id,
         league_id,
         season,
-        home_team,
+        home_team, 
         away_team,
         home_logo,
         away_logo,

@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { join } from 'node:path';
 import { startMatchWorker } from './workers/matchWorker.js';
 
 import leaguesRoutes from './routes/leagues.routes.js';
