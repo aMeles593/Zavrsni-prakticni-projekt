@@ -391,24 +391,12 @@ export async function saveEventsToDB(localMatchId, events, apiMatchId = null){
       const result = await db.query(
       `
       INSERT INTO match_events
-      (
-          match_id,
-          minute,
-          extra_minute,
-          type,
-          detail,
-          team_id,
-          team_name,
-          player_id,
-          player_name,
-          assist_name,
-          event_key
+      (match_id, minute, extra_minute, type, detail, team_id, 
+      team_name, player_id, player_name, assist_name, event_key
       )
 
       VALUES
-      (
-          $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11
-      )
+      ( $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11 )
 
       ON CONFLICT (event_key)
 
