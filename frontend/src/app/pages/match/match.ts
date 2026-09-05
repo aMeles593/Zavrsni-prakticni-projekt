@@ -33,19 +33,35 @@ loading = true;
 activeTab:'events' | 'lineups' = 'events';
 lineups:any = null;
 lineupLoading=false;
-ngOnInit(){
+leagueId: number = 0;
+season: number = 0;
+ngOnInit() {
 
-    this.route.paramMap.subscribe(params=>{
-        const id = Number(params.get('id'));
-        console.log(
-            "MATCH PAGE ID:",
-            id
-        );
-        if(!id)
-          return;
-        this.matchId = id;
-        this.loadMatch(id);
+  this.route.paramMap.subscribe(params => {
+
+    const id = Number(params.get('id'));
+
+    console.log("MATCH PAGE ID:", id);
+
+    if (!id) {
+      return;
+    }
+
+    this.matchId = id;
+
+    this.route.queryParamMap.subscribe(queryParams => {
+
+      this.leagueId = Number(queryParams.get('leagueId'));
+      this.season = Number(queryParams.get('season'));
+
+      console.log("LEAGUE ID:", this.leagueId);
+      console.log("SEASON:", this.season);
+
     });
+
+    this.loadMatch(id);
+
+  });
 
 }
 
@@ -308,5 +324,20 @@ openPlayer(playerId: number) {
       matchId: this.match?.api_match_id
     }
   });
+}
+
+backToSeason() {
+
+  if (!this.leagueId || !this.season) {
+    this.router.navigate(['/']);
+    return;
+  }
+
+  this.router.navigate(['/league', this.leagueId], {
+    queryParams: {
+      season: this.season
+    }
+  });
+
 }
 }

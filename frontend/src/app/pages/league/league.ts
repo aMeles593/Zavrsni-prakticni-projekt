@@ -306,11 +306,22 @@ export class LeagueComponent {
 
       });
   }
-  openMatch(id:number){
+  openMatch(id: number) {
+
+    const leagueId = Number(
+      this.route.snapshot.paramMap.get('id')
+    );
 
     console.log('Opening match:', id);
+    console.log('League ID:', leagueId);
+    console.log('Season:', this.selectedSeason);
 
-    this.router.navigate(['/match', id]);
+    this.router.navigate(['/match', id], {
+      queryParams: {
+        leagueId: leagueId,
+        season: this.selectedSeason
+      }
+    });
 
   }
 }
