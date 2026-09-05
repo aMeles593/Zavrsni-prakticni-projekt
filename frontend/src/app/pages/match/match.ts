@@ -1,5 +1,5 @@
 import { Component, ChangeDetectorRef, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FootballService } from '../../services/football';
 import { CommonModule } from '@angular/common';
 
@@ -17,6 +17,7 @@ export class MatchComponent {
 private route = inject(ActivatedRoute);
 private football = inject(FootballService);
 private cdr = inject(ChangeDetectorRef);
+private router = inject(Router);
 
 
 events:any[]=[];
@@ -291,5 +292,21 @@ showEvents(){
 ngOnDestroy(){
   try{ if(this.interval) clearInterval(this.interval); } catch(e){}
   try{ if(this.es) this.es.close(); } catch(e){}
+}
+
+
+openPlayer(playerId: number) {
+  if (!playerId) return;
+
+  console.log('OPEN PLAYER ID:', playerId);
+  console.log('MATCH ID:', this.match?.api_match_id);
+  console.log('MATCH SEASON:', this.match?.season);
+
+  this.router.navigate(['/player', playerId], {
+    queryParams: {
+      season: this.match?.season,
+      matchId: this.match?.api_match_id
+    }
+  });
 }
 }

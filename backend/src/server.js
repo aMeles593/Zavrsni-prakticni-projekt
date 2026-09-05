@@ -9,6 +9,7 @@ import matchDetailsRoutes from './routes/matchDetails.routes.js';
 import lineupRoutes from './routes/lineup.routes.js';
 import streamRoutes from './routes/stream.routes.js';
 import syncRoutes from './routes/sync.routes.js';
+import playerRoutes from './routes/player.routes.js';
 
 dotenv.config();
 const app = express();
@@ -22,6 +23,7 @@ app.use('/api', matchDetailsRoutes);
 app.use('/api',lineupRoutes);
 app.use('/api', streamRoutes);
 app.use('/api/sync', syncRoutes);
+app.use('/api', playerRoutes);
 
 app.listen(process.env.PORT, () => {
 

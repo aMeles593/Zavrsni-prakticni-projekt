@@ -65,9 +65,10 @@ export const getLineups = async (req,res)=>{
             existing.rows.forEach(player=>{
                 const playerObject = {
                     player:{
-                        name:player.player_name,
-                        number:player.number,
-                        position:player.position,
+                        id: player.player_id,
+                        name: player.player_name,
+                        number: player.number,
+                        position: player.position,
                         starter: player.starter,
                         substitute: player.substitute
                     }
@@ -193,6 +194,7 @@ export const getLineups = async (req,res)=>{
         saved.rows.forEach(player => {
             const obj = {
                 player: {
+                    id: player.player_id,
                     name: player.player_name,
                     number: player.number,
                     position: player.position,

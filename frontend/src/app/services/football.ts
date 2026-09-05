@@ -61,11 +61,13 @@ export class FootballService {
 
   }
   syncFixtures(leagueId:number, season:number){
-
-  return this.http.get(
-    `${this.baseUrl}/sync/fixtures/${leagueId}?season=${season}`
-  );
-
-}
-
+    return this.http.get(
+      `${this.baseUrl}/sync/fixtures/${leagueId}?season=${season}`
+    );
+  }
+  getPlayer(id: number, season: number) {
+    return this.http.get<any>(
+      `${this.baseUrl}/players/${id}?season=${season}`
+    );
+  }
 }

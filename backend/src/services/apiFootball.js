@@ -436,3 +436,31 @@ export async function saveEventsToDB(localMatchId, events, apiMatchId = null){
       }
   }
 }
+export async function fetchPlayer(playerId, season){
+    try {
+        const response = await axios.get(
+            `${process.env.API_URL}/players?id=${playerId}&season=${season}`,
+            {
+                headers
+            }
+        );
+
+        console.log("PLAYER API RESPONSE:", response.data);
+
+        const player = response.data.response?.[0];
+
+        if (!player) {
+            return null;
+        }
+
+        return player;
+    }
+    catch(err){
+        console.error(
+            "PLAYER API ERROR:",
+            err.response?.data || err.message
+        );
+
+        throw err;
+    }
+}

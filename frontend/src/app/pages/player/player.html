@@ -1,0 +1,151 @@
+<div class="container py-5">
+
+  <div
+    *ngIf="loading"
+    class="text-center text-black"
+  >
+    Loading player...
+  </div>
+
+
+  <div
+    *ngIf="player && !loading"
+    class="player-page"
+  >
+
+    <div class="player-header">
+
+      <button
+        class="back-button"
+        (click)="goBack()"
+      >
+        ← Back
+      </button>
+
+    </div>
+
+
+    <div class="player-card-main">
+
+      <div class="player-photo">
+
+        <img
+          *ngIf="player.player.photo"
+          [src]="player.player.photo"
+          [alt]="player.player.name"
+        >
+      </div>
+
+      <div class="player-main-info">
+
+        <h1>
+          {{ player.player.name }}
+        </h1>
+
+        <p
+          *ngIf="player.player.nationality"
+          class="nationality"
+        >
+          {{ player.player.nationality }}
+        </p>
+
+        <div class="player-details">
+
+          <div *ngIf="player.player.age">
+            <strong>Age</strong>
+            <span>{{ player.player.age }}</span>
+          </div>
+
+          <div *ngIf="player.player.height">
+            <strong>Height</strong>
+            <span>{{ player.player.height }}</span>
+          </div>
+
+          <div *ngIf="player.player.weight">
+            <strong>Weight</strong>
+            <span>{{ player.player.weight }}</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      *ngIf="player.statistics?.length"
+      class="statistics-section"
+    >
+
+      <h2>
+        Statistics
+      </h2>
+
+
+      <div
+        class="statistics-card"
+        *ngFor="let stat of player.statistics"
+      >
+
+        <div class="club-info">
+
+          <img
+            *ngIf="stat.team?.logo"
+            [src]="stat.team.logo"
+            [alt]="stat.team.name"
+          >
+
+          <strong>
+            {{ stat.team?.name }}
+          </strong>
+
+        </div>
+
+
+        <div class="statistics-grid">
+
+          <div>
+            <strong>Appearances</strong>
+            <span>{{ stat.games?.appearences ?? 0 }}</span>
+          </div>
+
+          <div>
+            <strong>Lineups</strong>
+            <span>{{ stat.games?.lineups ?? 0 }}</span>
+          </div>
+
+          <div>
+            <strong>Minutes</strong>
+            <span>{{ stat.games?.minutes ?? 0 }}</span>
+          </div>
+
+          <div>
+            <strong>Goals</strong>
+            <span>{{ stat.goals?.total ?? 0 }}</span>
+          </div>
+
+          <div>
+            <strong>Assists</strong>
+            <span>{{ stat.goals?.assists ?? 0 }}</span>
+          </div>
+
+          <div>
+            <strong>Yellow cards</strong>
+            <span>{{ stat.cards?.yellow ?? 0 }}</span>
+          </div>
+
+          <div>
+            <strong>Red cards</strong>
+            <span>{{ stat.cards?.red ?? 0 }}</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

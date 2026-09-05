@@ -233,7 +233,8 @@
     </h4>
     <div 
     class="player-card"
-    *ngFor="let p of lineups.away.starters">
+    *ngFor="let p of lineups.away.starters"
+    (click)="openPlayer(p.player.id)">
     <div class="number">
     {{p.player.number}}
     </div>
@@ -251,7 +252,8 @@
     </h4>
     <div 
     class="player-card substitute"
-    *ngFor="let p of lineups.away.substitutes">
+    *ngFor="let p of lineups.away.substitutes"
+    (click)="openPlayer(p.player.id)">
     <div class="number">
     {{p.player.number}}
     </div>
@@ -275,7 +277,8 @@
     </h4>
     <div 
     class="player-card"
-    *ngFor="let p of lineups.home.starters">
+    *ngFor="let p of lineups.home.starters"
+    (click)="openPlayer(p.player.id)">
     <div class="number">
     {{p.player.number}}
     </div>
@@ -293,7 +296,8 @@
     </h4>
     <div 
     class="player-card substitute"
-    *ngFor="let p of lineups.home.substitutes">
+    *ngFor="let p of lineups.home.substitutes"
+    (click)="openPlayer(p.player.id)">
     <div class="number">
     {{p.player.number}}
     </div>
