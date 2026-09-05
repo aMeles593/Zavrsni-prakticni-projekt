@@ -70,4 +70,11 @@ export class FootballService {
       `${this.baseUrl}/players/${id}?season=${season}`
     );
   }
+  getPlayerSeasons(id: number) {
+
+  return this.http.get<number[]>(
+    `${this.baseUrl}/players/${id}/seasons`
+  );
+
+}
 }

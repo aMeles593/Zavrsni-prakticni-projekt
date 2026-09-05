@@ -464,3 +464,175 @@ export async function fetchPlayer(playerId, season){
         throw err;
     }
 }
+export async function savePlayerToDB(playerData, season) {
+
+    const player = playerData.player;
+
+    const playerResult = await db.query(
+        `
+        INSERT INTO players (
+            api_player_id,
+            season,
+            name,
+            firstname,
+            lastname,
+            age,
+            nationality,
+            height,
+            weight,
+            photo
+        )
+        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
+
+        ON CONFLICT (api_player_id, season)
+        DO UPDATE SET
+            name = EXCLUDED.name,
+            firstname = EXCLUDED.firstname,
+            lastname = EXCLUDED.lastname,
+            age = EXCLUDED.age,
+            nationality = EXCLUDED.nationality,
+            height = EXCLUDED.height,
+            weight = EXCLUDED.weight,
+            photo = EXCLUDED.photo,
+            updated_at = CURRENT_TIMESTAMP
+
+        RETURNING id
+        `,
+        [
+            player.id,
+            season,
+            player.name,
+            player.firstname,
+            player.lastname,
+            player.age,
+            player.nationality,
+            player.height,
+            player.weight,
+            player.photo
+        ]
+    );
+
+    const localPlayerId = playerResult.rows[0].id;
+
+
+    for (const stat of playerData.statistics || []) {
+
+        await db.query(
+            `
+            INSERT INTO player_statistics (
+                player_id,
+
+                team_id,
+                team_name,
+                team_logo,
+
+                competition_id,
+                competition_name,
+                competition_logo,
+
+                appearances,
+                lineups,
+                minutes,
+
+                goals,
+                assists,
+
+                yellow_cards,
+                red_cards
+            )
+
+            VALUES (
+                $1,$2,$3,$4,
+                $5,$6,$7,
+                $8,$9,$10,
+                $11,$12,
+                $13,$14
+            )
+
+            ON CONFLICT (
+                player_id,
+                team_id,
+                competition_id
+            )
+
+            DO UPDATE SET
+
+                team_name = EXCLUDED.team_name,
+                team_logo = EXCLUDED.team_logo,
+
+                competition_name =
+                    EXCLUDED.competition_name,
+
+                competition_logo =
+                    EXCLUDED.competition_logo,
+
+                appearances =
+                    EXCLUDED.appearances,
+
+                lineups =
+                    EXCLUDED.lineups,
+
+                minutes =
+                    EXCLUDED.minutes,
+
+                goals =
+                    EXCLUDED.goals,
+
+                assists =
+                    EXCLUDED.assists,
+
+                yellow_cards =
+                    EXCLUDED.yellow_cards,
+
+                red_cards =
+                    EXCLUDED.red_cards
+            `,
+            [
+                localPlayerId,
+
+                stat.team?.id ?? null,
+                stat.team?.name ?? null,
+                stat.team?.logo ?? null,
+
+                stat.league?.id ?? null,
+                stat.league?.name ?? null,
+                stat.league?.logo ?? null,
+
+                stat.games?.appearences ?? 0,
+                stat.games?.lineups ?? 0,
+                stat.games?.minutes ?? 0,
+
+                stat.goals?.total ?? 0,
+                stat.goals?.assists ?? 0,
+
+                stat.cards?.yellow ?? 0,
+                stat.cards?.red ?? 0
+            ]
+        );
+    }
+
+
+    // Označi sezonu kao spremljenu
+    await db.query(
+        `
+        INSERT INTO player_season_cache (
+            api_player_id,
+            season
+        )
+        VALUES ($1, $2)
+
+        ON CONFLICT (
+            api_player_id,
+            season
+        )
+        DO NOTHING
+        `,
+        [
+            player.id,
+            season
+        ]
+    );
+
+
+    return localPlayerId;
+}
