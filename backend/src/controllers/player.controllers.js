@@ -1,9 +1,6 @@
 import db from '../db/db.js';
 
-import {
-    fetchPlayer,
-    savePlayerToDB
-} from '../services/apiFootball.js';
+import {fetchPlayer, savePlayerToDB} from '../services/apiFootball.js';
 
 
 export const getPlayer = async (req, res) => {
@@ -42,13 +39,6 @@ export const getPlayer = async (req, res) => {
             season
         );
 
-
-        /*
-        ==========================================
-        1. PROVJERI CACHE
-        ==========================================
-        */
-
         const cacheResult = await db.query(
             `
             SELECT id
@@ -61,13 +51,6 @@ export const getPlayer = async (req, res) => {
                 season
             ]
         );
-
-
-        /*
-        ==========================================
-        2. AKO JE VEĆ U CACHEU
-        ==========================================
-        */
 
         if (cacheResult.rows.length > 0) {
 
@@ -91,13 +74,6 @@ export const getPlayer = async (req, res) => {
                     ]
                 );
 
-
-            /*
-            --------------------------------------
-            NEMA IGRAČA
-            --------------------------------------
-            */
-
             if (playerResult.rows.length === 0) {
 
                 return res.status(404).json({
@@ -109,13 +85,6 @@ export const getPlayer = async (req, res) => {
 
             const player =
                 playerResult.rows[0];
-
-
-            /*
-            --------------------------------------
-            STATISTIKE
-            --------------------------------------
-            */
 
             const statsResult =
                 await db.query(
@@ -254,13 +223,6 @@ export const getPlayer = async (req, res) => {
 
         }
 
-
-        /*
-        ==========================================
-        3. NEMA U CACHEU → API
-        ==========================================
-        */
-
         console.log(
             'PLAYER SEASON NOT IN CACHE → API:',
             season
@@ -273,13 +235,6 @@ export const getPlayer = async (req, res) => {
                 season
             );
 
-
-        /*
-        ==========================================
-        4. API NEMA IGRAČA
-        ==========================================
-        */
-
         if (!apiPlayer) {
 
             console.log(
@@ -288,8 +243,6 @@ export const getPlayer = async (req, res) => {
                 season
             );
 
-
-            // Zapamti da smo provjerili ovu sezonu
             await db.query(
                 `
                 INSERT INTO player_season_cache (
@@ -309,12 +262,6 @@ export const getPlayer = async (req, res) => {
                     season
                 ]
             );
-
-
-            /*
-            Uzmi osnovne podatke o igraču
-            iz neke već spremljene sezone.
-            */
 
             const playerResult =
                 await db.query(
@@ -342,12 +289,6 @@ export const getPlayer = async (req, res) => {
 
             const player =
                 playerResult.rows[0];
-
-
-            /*
-            Nema statistike za odabranu sezonu,
-            ali igrač postoji.
-            */
 
             return res.json({
 
@@ -388,13 +329,6 @@ export const getPlayer = async (req, res) => {
 
         }
 
-
-        /*
-        ==========================================
-        5. SPREMI PODATKE
-        ==========================================
-        */
-
         const localPlayerId =
             await savePlayerToDB(
                 apiPlayer,
@@ -407,13 +341,6 @@ export const getPlayer = async (req, res) => {
             playerId,
             season
         );
-
-
-        /*
-        ==========================================
-        6. RESPONSE
-        ==========================================
-        */
 
         const statistics =
             (apiPlayer.statistics || [])

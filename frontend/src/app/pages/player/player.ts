@@ -1,21 +1,8 @@
-import {
-  Component,
-  OnInit,
-  inject,
-  ChangeDetectorRef
-} from '@angular/core';
-
-import {
-  ActivatedRoute,
-  Router
-} from '@angular/router';
+import {Component, OnInit, inject, ChangeDetectorRef} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import { FormsModule } from '@angular/forms';
-
 import { CommonModule } from '@angular/common';
-
-import { FootballService }
-  from '../../services/football';
-
+import { FootballService } from '../../services/football';
 
 @Component({
   selector: 'app-player',
@@ -31,31 +18,19 @@ export class PlayerComponent
   implements OnInit {
 
 
-  private route =
-    inject(ActivatedRoute);
+  private route = inject(ActivatedRoute);
 
-  private football =
-    inject(FootballService);
+  private football = inject(FootballService);
 
-  private router =
-    inject(Router);
+  private router = inject(Router);
 
-  private cdr =
-    inject(ChangeDetectorRef);
-
+  private cdr = inject(ChangeDetectorRef);
 
   player: any = null;
 
   loading = true;
 
   error = false;
-
-
-  /*
-  ==========================================
-  SEZONE
-  ==========================================
-  */
 
   seasons: number[] = [];
 
@@ -102,22 +77,8 @@ export class PlayerComponent
       return;
     }
 
-
-    /*
-    ========================================
-    POSTAVI POČETNU SEZONU
-    ========================================
-    */
-
     this.selectedSeason =
       season;
-
-
-    /*
-    ========================================
-    UČITAJ DOSTUPNE SEZONE
-    ========================================
-    */
 
     this.loadSeasons(
       playerId,
@@ -126,22 +87,10 @@ export class PlayerComponent
 
   }
 
-
-  /*
-  ==========================================
-  LOAD SEASONS
-  ==========================================
-  */
-
   loadSeasons(
     playerId: number,
     currentSeason: number
   ) {
-
-    /*
-    Za početak koristimo sezone iz matches
-    tablice.
-    */
 
     this.football
       .getPlayerSeasons(
@@ -162,12 +111,6 @@ export class PlayerComponent
               ? seasons
               : [];
 
-
-          /*
-          Trenutna sezona mora postojati
-          u dropdownu.
-          */
-
           if (
             !this.seasons.includes(
               currentSeason
@@ -179,11 +122,6 @@ export class PlayerComponent
             );
 
           }
-
-
-          /*
-          Najnovija prvo
-          */
 
           this.seasons.sort(
             (a, b) => b - a
@@ -204,13 +142,6 @@ export class PlayerComponent
             err
           );
 
-
-          /*
-          Ako endpoint za sezone
-          zakaže, barem prikaži
-          trenutnu sezonu.
-          */
-
           this.seasons = [
             currentSeason
           ];
@@ -226,13 +157,6 @@ export class PlayerComponent
       });
 
   }
-
-
-  /*
-  ==========================================
-  LOAD PLAYER
-  ==========================================
-  */
 
   loadPlayer(
     playerId: number,
@@ -295,13 +219,6 @@ export class PlayerComponent
 
   }
 
-
-  /*
-  ==========================================
-  PROMJENA SEZONE
-  ==========================================
-  */
-
   changeSeason(season: number) {
 
     if (!season) return;
@@ -328,13 +245,6 @@ export class PlayerComponent
 
     this.loadPlayer(playerId, season);
   }
-
-
-  /*
-  ==========================================
-  BACK
-  ==========================================
-  */
 
   goBack() {
 

@@ -1,7 +1,5 @@
 <div class="container py-5">
 
-  <!-- LOADING -->
-
   <div
     *ngIf="loading"
     class="text-center text-black"
@@ -9,16 +7,10 @@
     Loading player...
   </div>
 
-
-  <!-- PLAYER -->
-
   <div
     *ngIf="player && !loading"
     class="player-page"
   >
-
-
-    <!-- HEADER -->
 
     <div class="player-header">
 
@@ -30,9 +22,6 @@
       </button>
 
     </div>
-
-
-    <!-- PLAYER MAIN -->
 
     <div class="player-card-main">
 
@@ -117,9 +106,6 @@
 
     </div>
 
-
-    <!-- SEASON SELECT -->
-
     <div
       *ngIf="seasons.length"
       class="season-selector"
@@ -145,9 +131,6 @@
 
     </div>
 
-
-    <!-- STATISTICS -->
-
     <div
       *ngIf="player.statistics?.length"
       class="statistics-section"
@@ -158,9 +141,6 @@
         Statistics
       </h2>
 
-
-      <!-- STAT CARD -->
-
       <div
         class="statistics-card"
 
@@ -169,9 +149,6 @@
           of player.statistics
         "
       >
-
-
-        <!-- CLUB + COMPETITION -->
 
         <div class="club-info">
 
@@ -207,9 +184,6 @@
           </div>
 
         </div>
-
-
-        <!-- STATISTICS -->
 
         <div class="statistics-grid">
 
@@ -310,9 +284,6 @@
       </div>
 
     </div>
-
-
-    <!-- NEMA STATISTIKA -->
 
     <div
       *ngIf="
