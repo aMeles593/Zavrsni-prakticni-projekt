@@ -72,8 +72,7 @@ startSSE(){
   if(!this.matchId){
     return;
   }
-  const url = `http://localhost:3000/api/stream?matchId=${this.matchId}`;
-  try{
+  const url = `https://nogometna-backend.onrender.com/api/stream?matchId=${this.matchId}`;  try{
     this.es = new EventSource(url);
     this.es.addEventListener('match_event', (e:any)=>{
       const payload = JSON.parse(e.data);
