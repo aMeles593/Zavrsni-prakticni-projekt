@@ -37,7 +37,7 @@ CREATE TABLE public.leagues (
 );
 
 
-ALTER TABLE public.leagues OWNER TO postgres;
+ 
 
 --
 -- TOC entry 217 (class 1259 OID 17920)
@@ -53,7 +53,6 @@ CREATE SEQUENCE public.leagues_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.leagues_id_seq OWNER TO postgres;
 
 --
 -- TOC entry 4907 (class 0 OID 0)
@@ -86,7 +85,6 @@ CREATE TABLE public.match_events (
 );
 
 
-ALTER TABLE public.match_events OWNER TO postgres;
 
 --
 -- TOC entry 223 (class 1259 OID 18112)
@@ -101,8 +99,6 @@ CREATE SEQUENCE public.match_events_id_seq
     NO MAXVALUE
     CACHE 1;
 
-
-ALTER SEQUENCE public.match_events_id_seq OWNER TO postgres;
 
 --
 -- TOC entry 4908 (class 0 OID 0)
@@ -131,8 +127,6 @@ CREATE TABLE public.match_lineups (
 );
 
 
-ALTER TABLE public.match_lineups OWNER TO postgres;
-
 --
 -- TOC entry 221 (class 1259 OID 18004)
 -- Name: match_lineups_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -146,8 +140,6 @@ CREATE SEQUENCE public.match_lineups_id_seq
     NO MAXVALUE
     CACHE 1;
 
-
-ALTER SEQUENCE public.match_lineups_id_seq OWNER TO postgres;
 
 --
 -- TOC entry 4909 (class 0 OID 0)
@@ -184,8 +176,6 @@ CREATE TABLE public.matches (
 );
 
 
-ALTER TABLE public.matches OWNER TO postgres;
-
 --
 -- TOC entry 219 (class 1259 OID 17953)
 -- Name: matches_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -198,9 +188,6 @@ CREATE SEQUENCE public.matches_id_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
-ALTER SEQUENCE public.matches_id_seq OWNER TO postgres;
 
 --
 -- TOC entry 4910 (class 0 OID 0)
@@ -224,8 +211,6 @@ CREATE TABLE public.player_season_cache (
 );
 
 
-ALTER TABLE public.player_season_cache OWNER TO postgres;
-
 --
 -- TOC entry 232 (class 1259 OID 18593)
 -- Name: player_season_cache_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -238,9 +223,6 @@ CREATE SEQUENCE public.player_season_cache_id_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
-ALTER SEQUENCE public.player_season_cache_id_seq OWNER TO postgres;
 
 --
 -- TOC entry 4911 (class 0 OID 0)
@@ -275,8 +257,6 @@ CREATE TABLE public.player_statistics (
 );
 
 
-ALTER TABLE public.player_statistics OWNER TO postgres;
-
 --
 -- TOC entry 230 (class 1259 OID 18570)
 -- Name: player_statistics_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -290,8 +270,6 @@ CREATE SEQUENCE public.player_statistics_id_seq
     NO MAXVALUE
     CACHE 1;
 
-
-ALTER SEQUENCE public.player_statistics_id_seq OWNER TO postgres;
 
 --
 -- TOC entry 4912 (class 0 OID 0)
@@ -324,8 +302,6 @@ CREATE TABLE public.players (
 );
 
 
-ALTER TABLE public.players OWNER TO postgres;
-
 --
 -- TOC entry 228 (class 1259 OID 18534)
 -- Name: players_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -339,8 +315,6 @@ CREATE SEQUENCE public.players_id_seq
     NO MAXVALUE
     CACHE 1;
 
-
-ALTER SEQUENCE public.players_id_seq OWNER TO postgres;
 
 --
 -- TOC entry 4913 (class 0 OID 0)
@@ -364,8 +338,6 @@ CREATE TABLE public.sync_status (
 );
 
 
-ALTER TABLE public.sync_status OWNER TO postgres;
-
 --
 -- TOC entry 225 (class 1259 OID 18203)
 -- Name: sync_status_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -380,7 +352,6 @@ CREATE SEQUENCE public.sync_status_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.sync_status_id_seq OWNER TO postgres;
 
 --
 -- TOC entry 4914 (class 0 OID 0)
