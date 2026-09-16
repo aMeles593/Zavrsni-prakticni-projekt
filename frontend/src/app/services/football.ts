@@ -7,8 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class FootballService {
 
   private http = inject(HttpClient);
-  private baseUrl = 'http://localhost:3000/api';
-
+  private baseUrl = 'https://nogometna-backend.onrender.com/api';
   getHomeLeagues() {
     return this.http.get(`${this.baseUrl}/leagues/home`);
   }
