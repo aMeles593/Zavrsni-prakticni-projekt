@@ -10,7 +10,7 @@ export const getFeaturedLeagues = async () => {
 };
 
 export const getExploreLeagues = async () => {
-  const exploredIds = [39, 140, 61, 88, 94, 135, 4, 1, 2, 3];
+  const exploredIds = [39, 140, 61, 88, 94, 135, 4, 1, 2, 3, 389, 274, 1031];
   const result = await db.query(`
     SELECT * FROM leagues
     WHERE api_id = ANY($1)
