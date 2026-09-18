@@ -11,8 +11,6 @@ Aplikacija je podijeljena na frontend i backend dio. Frontend je razvijen koriš
 Aplikacija je dostupna na:
 https://footyhub-mspk.onrender.com/#/
 
-Backend API:
-https://nogometna-backend.onrender.com
 
 ## Glavne mogućnosti
 
