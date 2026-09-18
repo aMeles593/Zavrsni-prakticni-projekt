@@ -3,7 +3,7 @@ import {fetchLiveFixtures, fetchMatchEvents, saveEventsToDB} from '../services/a
 import { getExploreLeagues } from '../services/leagues.js';
 import broadcaster from '../lib/broadcast.js';
 
-const INTERVAL = 7200000; 
+const INTERVAL = 30000; 
 
 export const startMatchWorker = ()=>{
     console.log(
