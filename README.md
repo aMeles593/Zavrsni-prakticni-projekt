@@ -6,6 +6,14 @@ Podaci o nogometnim natjecanjima i utakmicama dohvaćaju se putem servisa API-Fo
 
 Aplikacija je podijeljena na frontend i backend dio. Frontend je razvijen korištenjem Angulara i TypeScripta, dok backend koristi Node.js i Express. Za prikaz promjena podataka o utakmicama u stvarnom vremenu koristi se Server-Sent Events (SSE), dok Match Worker periodički dohvaća podatke o utakmicama koje su trenutno u tijeku i ažurira ih u bazi podataka.
 
+## Pokrenuta aplikacija
+
+Aplikacija je dostupna na:
+https://footyhub-mspk.onrender.com/#/
+
+Backend API:
+https://nogometna-backend.onrender.com
+
 ## Glavne mogućnosti
 
 * pregled dostupnih nogometnih liga
